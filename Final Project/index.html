@@ -46,8 +46,7 @@
 
 <h2 align="middle">Project Summary</h2>
 <p>
-    For this project, we are going to create a Minecraft shaderpack. It will better mimic real-life lighting by implementing volumentric fog, more realistic shadows, water texture and reflections, and ray tracing.
-
+  For this project, we are designing  a Minecraft shaderpack. Minecraft’s existing shading is very basic and limited so we plan to add more realism and immersion to the game, mimicking  real-life lighting by implementing volumetric fog, shadow mapping, screen-space reflections for more realistic water, and ray tracing.
 
 </p>
 <br>
@@ -57,15 +56,17 @@
   Project Description
 </h3>
 <p>
-    We are trying to solve Minecraft unrealistic lighting. It follows a linear fall off between where a light source is and the surrounding area. By providing more realistic lighting, we can increase the quality of the player experience.
-<br>
-    The biggest challenge nagivating existing mods and the framework for creating shaderpacks. No one on our team has experience with shaders but we all found it very interesting. We are getting started by following some tutorials online with setting up and getting our shaders running. However, from there, we will implement formulas and methods we see online for the techniques we want to implement.
+  We are trying to solve unrealistic lighting in Minecraft and add more immersive and realistic effects to the game. Currently, shading in Minecraft simply follows a linear fall off between where a light source is and the surrounding area. By providing more realistic lighting, we can increase the quality of the player experience and add more depth to gameplay. We hope to deliver a number of shader effects including volumetric fog, shadow mapping, screen-space reflections for more realistic water, and ray tracing.
+  <br>
+  A challenge for this project is navigating pre-existing frameworks and mods used in Minecraft shading; since this project is not a standalone we will need to make sure it integrates well with the existing frameworks that we will build off of and the existing game engine. We plan to build our project off of the OptiFine mod’s rendering pipeline using OpenGL/GLSL. From there, we will implement our various shader effects based on the papers and documentation referenced in the Resources section.
 </p>
 <br>
 
 <h3>
     Deliverables
 </h3>
+<h4> What we plan to deliver </h4>
+<p>We plan to deliver a functioning shaderpack with implementations of volumetric fog, shadow mapping, screen-space reflections, and ray tracing.</p>
 <p>
     Here are examples of what we are trying to implement. These images were taken in Minecraft using the BSL Shaderpack and a 128x realistic texture pack.
     <div align="middle">
@@ -115,30 +116,38 @@
 </p>
 
 <p>
-    Since shaderpacks run in minecraft, we could bring a laptop with our shaderpack installed for viewers to test it out in real-time.
-    We will also make a video showcasing the different effects that we have created.
-
-    <br>
-    To measure quality and performance, we can compare to other shaderpacks that are publicly available. For performance, Minecraft automatically tracks frames per second, which is a great metric to test performance.
-    For quality, we can compare how our game looks compared to other popular shaderpacks. If we mimic similar visual effects, it will be successful.
-</p>
-<br>
-
-<h3 > Goals</h3>
-<h4> What we plan to deliver </h4>
-<p>
-    We plan to deliver a functioning shaderpack with atleast 3 of our intended effects working. We are weary of potential problems that might arise since our group doesn't have experience with creating shaders.
-    In addition, we are worried that the debugging process and development might take longer than we are currently anticipating. However, to be successful, we want to deliver a working product that shows improvements in the graphics.
+  The volumetric fog algorithm uses volumetric textures as intermediate storage to decouple and parallelize the emulation of atmospheric scattering for efficient and realistic fog.
+  <br>
+  Shadow mapping creates dynamic shadows by rendering the scene from the light in the first pass and then rendering the scene with a check that it is in a shadow.
+  <br>
+  Screen space reflection lets us add realistic reflections to things like water by reflecting the screen image onto itself to create the illusion of reflection.
+  <br>
+  Finally, we will also implement realistic lighting via raytracing similar to what we have covered in class.
+  <br>
+  None of our group has experience with modding or creating shaders so we might run into trouble working with the existing frameworks and game engines. In addition, we are worried that the debugging process and development might be difficult since there are a lot of parts to integrate and make sure work together.
+  <br>
+  In terms of a demo, we could bring a laptop with our shader pack installed for viewers to test it out in Minecraft in real-time. We will also make a video showcasing the different effects that we have created.
+  <br>
+  To measure quality and performance, we can compare to other shaderpacks that are publicly available. For performance, Minecraft automatically tracks frames per second, which is a great metric to test performance. For quality, we can compare how our game looks compared to other popular shaderpacks. If we mimic similar visual effects, it will be successful.
 </p>
 <h4> What we hope to deliver</h4>
-    Ideally, we hope to have a finished product with all of the effects we have detailed working. In addition, we hope that performance is above 60 frames per second for a playable experience.
-    If things go well and we get ahead of schedule, we ideally would like to improve the performance using fps as a metric. A good looking game has to also be playable, and increasing the framerate helps less graphically powerful devices run our shaders.
+<p>Ideally, we hope to have a finished product with all of the effects we have detailed working. In addition, we hope that performance is above 60 frames per second for a playable experience. If things go well and we get ahead of schedule, we ideally would like to improve the performance using fps as a metric. A good looking game has to also be playable, and increasing the framerate helps less graphically powerful devices run our shaders.</p>
 <br>
 
 <h3>Timeline</h2>
+  <p><b>Week 1:</b> Familiarize ourselves with GLSL, Optifine, and other relevant frameworks/parts of the game engine. Work on ray tracing.</p>
+  <p><b>Week 2:</b> Finish up ray tracing and work on shadow mapping.</p>
+  <p><b>Week 3:</b> Work on implementing volumetric fog.</p>
+  <p><b>Week 4:</b> Work on implementing screen-space reflections. Work on presentation materials and finalize deliverables.</p>
 <br>
 
 <h3>Resources</h2>
+  <p>https://optifine.readthedocs.io/shaders_dev.html#overview (documentation for OptiFine rendering)</p>
+  <p>https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html (Screen-space reflection)</p>
+  <p>https://bartwronski.files.wordpress.com/2014/08/bwronski_volumetric_fog_siggraph2014.pdf (Volumetric fog)</p>
+  <p>http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/ (Shadow mapping)</p>
+  <p>We plan on using OpenGL/GLSL for our implementation as that is what Minecraft and OptiFine use.</p>
+  <p>In terms of hardware, we will use our personal computers to test and develop our shaders.</p>
     <br>
 </body>
 </html>
