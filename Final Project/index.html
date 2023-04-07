@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    background-color: white;
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  kbd {
+    color: #121212;
+  }
+</style>
+<title>CS 184 Path Tracer</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+</head>
+
+
+<body>
+
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2023</h1>
+<h1 align="middle">Final Project Proposal - Minecraft Shaders</h1>
+<h2 align="middle">Joey Zhao, Massimo Tseng, Jason Gong, Shawn Zhao</h2>
+<br><br>
+
+<h2 align="middle">Project Summary</h2>
+<p>
+    For this project, we are going to create a Minecraft shaderpack. It will better mimic real-life lighting by implementing volumentric fog, more realistic shadows, water texture and reflections, and ray tracing.
+
+
+</p>
+<br>
+
+
+<h3>
+  Project Description
+</h3>
+<p>
+    We are trying to solve Minecraft unrealistic lighting. It follows a linear fall off between where a light source is and the surrounding area. By providing more realistic lighting, we can increase the quality of the player experience.
+<br>
+    The biggest challenge nagivating existing mods and the framework for creating shaderpacks. No one on our team has experience with shaders but we all found it very interesting. We are getting started by following some tutorials online with setting up and getting our shaders running. However, from there, we will implement formulas and methods we see online for the techniques we want to implement.
+</p>
+<br>
+
+<h3>
+    Deliverables
+</h3>
+<p>
+    Here are examples of what we are trying to implement. These images were taken in Minecraft using the BSL Shaderpack and a 128x realistic texture pack.
+    <div align="middle">
+        <table style="width:100%">
+          <tr align="center">
+            <td>
+              <img src="images/default_fog.png" align="middle" width="400px"/>
+              <figcaption>Default "fog"</figcaption>
+            </td>
+            <td>
+              <img src="images/shader_fog.png" align="middle" width="400px"/>
+              <figcaption>Shader fog</figcaption>
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+              <img src="images/default_shadow.png" align="middle" width="400px"/>
+              <figcaption>Default shadows at a distance</figcaption>
+            </td>
+            <td>
+              <img src="images/shader_shadow.png" align="middle" width="400px"/>
+              <figcaption>Shader shadows at a distance</figcaption>
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+              <img src="images/default_water.png" align="middle" width="400px"/>
+              <figcaption>Default water</figcaption>
+            </td>
+            <td>
+              <img src="images/shader_water.png" align="middle" width="400px"/>
+              <figcaption>Shader water</figcaption>
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+              <img src="images/default_rt.png" align="middle" width="400px"/>
+              <figcaption>Default lighting</figcaption>
+            </td>
+            <td>
+              <img src="images/shader_rt.png" align="middle" width="400px"/>
+              <figcaption>Shader lighting with ray tracing</figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+</p>
+
+<p>
+    Since shaderpacks run in minecraft, we could bring a laptop with our shaderpack installed for viewers to test it out in real-time.
+    We will also make a video showcasing the different effects that we have created.
+
+    <br>
+    To measure quality and performance, we can compare to other shaderpacks that are publicly available. For performance, Minecraft automatically tracks frames per second, which is a great metric to test performance.
+    For quality, we can compare how our game looks compared to other popular shaderpacks. If we mimic similar visual effects, it will be successful.
+</p>
+<br>
+
+<h3 > Goals</h3>
+<h4> What we plan to deliver </h4>
+<p>
+    We plan to deliver a functioning shaderpack with atleast 3 of our intended effects working. We are weary of potential problems that might arise since our group doesn't have experience with creating shaders.
+    In addition, we are worried that the debugging process and development might take longer than we are currently anticipating. However, to be successful, we want to deliver a working product that shows improvements in the graphics.
+</p>
+<h4> What we hope to deliver</h4>
+    Ideally, we hope to have a finished product with all of the effects we have detailed working. In addition, we hope that performance is above 60 frames per second for a playable experience.
+    If things go well and we get ahead of schedule, we ideally would like to improve the performance using fps as a metric. A good looking game has to also be playable, and increasing the framerate helps less graphically powerful devices run our shaders.
+<br>
+
+<h3>Timeline</h2>
+<br>
+
+<h3>Resources</h2>
+    <br>
+</body>
+</html>
