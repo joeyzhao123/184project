@@ -1,7 +1,173 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Project 4 here
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+<title>CS 184 Mesh Editor</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2017</h1>
+<h1 align="middle">Project 4: Cloth Simulator</h1>
+<h2 align="middle">YOUR NAME, CS184-??</h2>
+
+<br><br>
+
+<div>
+
+<h2 align="middle">Overview</h2>
+<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+
+<h2 align="middle">Part I: Masses and springs</h2>
+
+<p>
+	<div align="middle">
+		<table style="width=100%">
+		  <tr>
+			<img src="images/pinned2.png" align="middle" width="800px"/>
+			<figcaption align="middle"pinned2.json</figcaption>
+		  </tr>
+		  <br>
+		  <tr>
+
+			  <img src="images/noshearing.png" align="middle" width="800px"/>
+			  <figcaption align="middle">No Shearing</figcaption>
+
+			  <img src="images/onlyshearing.png" align="middle" width="800px"/>
+			  <figcaption align="middle">Only Shearing</figcaption>
+
+				<img src="images/alleffects.png" align="middle" width="800px"/>
+				<figcaption align="middle">All Effects</figcaption>
+
+		  </tr>
+		  
+		</table>
+	</div>
+</p>
+
+<h2 align="middle">Part 2: Simulation via numerical integration</h2>
+
+
+<p>
+	<br>
+	<br>
+	<b>Describe the effects of changing the spring constant ks; how does the cloth behave from start to rest with a very low ks? A high ks?</b>
+	<br>
+	When we decrease the spring constant to be lower, the cloth is visibly looser as you would expect. The length the cloth hangs down is longer than the default. In addition, as the cloth is falling, it feels like it's fluttering down more, and you can see that the springs aren't pulling down as fast on the rest of the cloth.
+	
+	When we increase the spring constant to be much higher, the fold we see that occurs between the two 
+
+</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/lightspring.png" align="middle" width="400px"/>
+			<figcaption align="middle"> Ks at 50</figcaption>
+		</td>
+		<td>		
+			<img src="images/heavyspring.png" align="middle" width="400px"/>
+			<figcaption align="middle"> Ks at 100000</figcaption>
+		</td>
+
+	  </tr>
+	  
+	</table>
+</div>
+<p>
+	<b>What about for density?</b>
+	<br>
+	The part of the cloth that is slightly folded has the biggest difference between densities. When we have a low density, the fold basically disappears as the tension between the pinned points can support all of the weight. When we increase the density a lot, we see the fold is larger as the tension is not enough to support the weight.
+
+
+</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/lowdensity.png" align="middle" width="400px"/>
+			<figcaption align="middle">Density at 1</figcaption>
+		</td>
+		<td>		
+			<img src="images/highdensity.png" align="middle" width="400px"/>
+			<figcaption align="middle"> Densityat 100</figcaption>
+		</td>
+
+	  </tr>
+	  
+	</table>
+</div>
+
+<p>
+	<b>What about for damping?</b>
+	When we have a low damping, the cloth seems to affect itself more in the motion. It even sways back and forth unlike the default damping.
+	However, when damping is really high, it seems like the cloth is floating through mud and it moves very slow. There is almost no sway at the bottom either.
+
+
+</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/lowdamping.png" align="middle" width="400px"/>
+			<figcaption align="middle">Damping at 0</figcaption>
+		</td>
+		<td>		
+			<img src="images/highdamping.png" align="middle" width="400px"/>
+			<figcaption align="middle"> Damping at 100</figcaption>
+		</td>
+
+	  </tr>
+	  
+	</table>
+</div>
+<div align="middle"><img src="images/4pin.png" align="middle" width="800px"/>
+	<figcaption align="middle">4 pinned cloth</figcaption>
+
+</div>
+
+<h2 align="middle">Part 2: Handling collisions with other objects</h2>
+<br>
+<p>Below are collisions with spheres. We use a spring constant of 500, 5000, and 50000. The biggest difference that we can see occurs at the part of the cloth in contact with the sphere. At lower spring constants, there are less creases and the cloth seems to be resting more smoothly on the sphere. As we increase the spring constant, we see more ridges forming and the cloth looks a lot more rigid.</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/sphere500.png" align="middle" width="400px"/>
+			<figcaption align="middle">Spring Constant 500</figcaption>
+		</td>
+		<td>		
+			<img src="images/sphere5000.png" align="middle" width="400px"/>
+			<figcaption align="middle">Spring Constant 5000</figcaption>
+		</td>
+
+	</tr>
+	</table>
+</div>
+<div align="middle">
+<img src="images/sphere50000.png" align="middle" width="400px"/>
+<figcaption align="middle">Spring Constant 50000</figcaption>
+</div>
+
+<p align="middle">Below is our cloth colliding with a flat plane and not moving.</p>
+<div align="middle">
+	<img src="images/plane.png" align="middle" width="400px"/>
+	</div>
+</body>
 </html>
