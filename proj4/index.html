@@ -25,14 +25,16 @@
 
 <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2017</h1>
 <h1 align="middle">Project 4: Cloth Simulator</h1>
-<h2 align="middle">YOUR NAME, CS184-??</h2>
+<h2 align="middle">Joey Zhao and Massimo Tseng, CS184-lightparty</h2>
 
 <br><br>
 
 <div>
 
 <h2 align="middle">Overview</h2>
-<p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+<p>In this project, we worked to simulate cloth physics that would mimic real life. Conceptually, following the format of the project, we created the cloth, implemented collisions, and then added lighting to the cloths.
+	It was awesome to look at how our updates were changing the physics of the cloth itself and seeing it mimic real life physics. A lot of the problems that we encountered were just small errors in directions with the vectors. We were able to debug it however after taking a careful look at our code.
+</p>
 
 <h2 align="middle">Part I: Masses and springs</h2>
 
@@ -334,6 +336,56 @@
 		</tr>
 	</table>
 </div>
+</div>
+
+<h2 align="middle">Part 6: Extra Credit</h2>
+
+<br>
+<p>For our extra credit, we decided to implement wind, which was a varying force that cycled as the simulation went. We did our best to vary the forces to make it look as realistic as possible to stimulate a flag waving in the wind.
+
+	The mesh that we used had 3 pinned points along one side of the cloth as we thought it would mimic real-life flags the best.
+</p>
+<br>
+<p>These images are of the flag as it is in its lowest position</p>
+<div align="middle">
+	<table>
+	<tr>
+		<td>
+		<img src="images/flagdown1.png" align="middle" width="400px"/>
+		</td>
+		<td>
+		<img src="images/flagdown2.png" align="middle" width="400px"/>
+		</td>
+	</tr>
+</table>
+</div>
+<br>
+<p>These images are of the flag as it is being blown up</p>
+<div align="middle">
+	<table>
+	<tr>
+		<td>
+		<img src="images/flagblow1.png" align="middle" width="400px"/>
+		</td>
+		<td>
+		<img src="images/flagblow2.png" align="middle" width="400px"/>
+		</td>
+	</tr>
+</table>
+</div>
+<br>
+<p>These images are of the flag as it is up and flying</p>
+<div align="middle">
+	<table>
+	<tr>
+		<td>
+		<img src="images/flagup1.png" align="middle" width="400px"/>
+		</td>
+		<td>
+		<img src="images/flagup2.png" align="middle" width="400px"/>
+		</td>
+	</tr>
+</table>
 </div>
 </body>
 </html>
