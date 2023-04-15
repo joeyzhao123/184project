@@ -197,6 +197,143 @@
 <img src="images/end collide.png" align="middle" width="400px"/>
 <figcaption align="middle">End Collision</figcaption>
 </div>
+<p> With a higher density, the cloth crumples more with greater force against itself and flops around less. The cloth has more of a weighty feel, which is expected. As ks increases, the cloth ripples less and comes to a more convincing rest. With a very high spring constant, the cloth becomes more rigid looking and less convincing when it crumples onto itself.
+	The biggest visual difference through photos can be seen at their rest states. High density and low spring constant flattens the cloth, whereas low density and high spring constant props it higher up. 
+</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/lowdens_spring.png" align="middle" width="400px"/>
+			<figcaption align="middle">Low density</figcaption>
+		</td>
+		<td>		
+			<img src="images/highdens_spring.png" align="middle" width="400px"/>
+			<figcaption align="middle">High density</figcaption>
+		</td>
 
+	</tr>
+	</table>
+</div>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+	<td>
+		<img src="images/highks_spring.png" align="middle" width="400px"/>
+		<figcaption align="middle">High spring constant</figcaption>
+	</td>
+	<td>
+		<img src="images/lowks_spring.png" align="middle" width="400px"/>
+		<figcaption align="middle">Low spring constant</figcaption>
+	</td>
+	</tr>
+</table>
+</div>
+
+<h2 align="middle">Part 5: Shaders</h2>
+<br>
+<p>
+	Shader programs are programs that run on the GPU, which is significantly faster because of their parallel computing capabilities. They render the lighting in place of the CPU. In our pipeline, we input into the fragment shaders the output of the vertex shaders. 
+	The vertex shaders handle the transformations of vertices, whereas the fragment shaders are using those transformations to compute properties of a fragment (or sample), in our case color. 
+	</p>
+
+	<p>We first implemented the Blinn-Phong model. Below contains each component of the model, and finally a render using the full model</p>
+<div align="middle">
+	<table style="width=100%">
+	<tr>
+		<td>
+			<img src="images/ambient_only.png" align="middle" width="400px"/>
+			<figcaption align="middle">Ambient component only</figcaption>
+		</td>
+		<td>
+			<img src="images/diffuse_only.png" align="middle" width="400px"/>
+			<figcaption align="middle">Diffuse component only</figcaption>
+		</td>
+		<tr>
+			<td>
+			<img src="images/specular_only.png" align="middle" width="400px"/>
+			<figcaption align="middle">Specular component only</figcaption>
+			</td>
+			<td>
+			<img src="images/fullbphong.png" align="middle" width="400px"/>
+			<figcaption align="middle">Full Blinn-Phong Model</figcaption>
+			</td>
+		</tr>
+	</tr>
+</table>
+
+<p>Next was implementing textures. This was simply using the texture function and sampling</p>
+<div align="middle">
+			<img src="images/custom_texture.png" align="middle" width="400px"/>
+			<figcaption align="middle">Custom texture</figcaption>
+</div>
+<p>
+	 Bump does not affect the vertex location; it only changes the shading based on the normal. Displacement mapping changes the actual location of the vertex, hence the name. It's immediately clear
+	that the vertex positions are changed in displacement versus bump from the pRotruding points on the right hand side shown below. 
+	</p>
+<div align="middle">
+	<table style="width=100%">
+		<tr>
+			<td>
+			<img src="images/bump_cloth.png" align="middle" width="400px"/>
+			<figcaption align="middle">Bump mapping on cloth</figcaption>
+			</td>
+			<td>
+			<img src="images/bump_sphere.png" align="middle" width="400px"/>
+			<figcaption align="middle">Bump mapping on sphere</figcaption>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<img src="images/displacement_cloth.png" align="middle" width="400px"/>
+			<figcaption align="middle">Displacement mapping on cloth</figcaption>
+			</td>
+			<td>
+			<img src="images/displacement_sphere.png" align="middle" width="400px"/>
+			<figcaption align="middle">Displacement mapping on sphere</figcaption>
+			</td>
+		</tr>
+		</table>
+		<p>Differing coarseness has no noticeable effect in the bump map, but a clear effect in the displacement map. The displaced vertices in the higher resolution render are less noticeable. </p>
+		<table>
+		<tr>
+			<td>
+			<img src="images/bump_16.png" align="middle" width="400px"/>
+			<figcaption align="middle">Bump, 16</figcaption>
+			</td>
+			<td>
+			<img src="images/displacement_16.png" align="middle" width="400px"/>
+			<figcaption align="middle">Displacement, 16</figcaption>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<img src="images/bump_128.png" align="middle" width="400px"/>
+			<figcaption align="middle">Bump, 128</figcaption>
+			</td>
+			<td>
+			<img src="images/displacement_128.png" align="middle" width="400px"/>
+			<figcaption align="middle">Displacement, 128</figcaption>
+			</td>
+		</tr>
+	</table>
+</div>
+<p> Finally, the mirror shader was implemented.
+</p>
+	<div align="middle">
+		<table>
+		<tr>
+			<td>
+			<img src="images/mirror_cloth.png" align="middle" width="400px"/>
+			<figcaption align="middle">Mirror on cloth</figcaption>
+			</td>
+			<td>
+			<img src="images/mirror_sphere.png" align="middle" width="400px"/>
+			<figcaption align="middle">Mirror on sphere</figcaption>
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
 </body>
 </html>
