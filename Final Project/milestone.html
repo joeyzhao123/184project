@@ -44,12 +44,30 @@
 <h2 align="middle">Joey Zhao, Massimo Tseng, Jason Gong, Shawn Zhao</h2>
 <br><br>
 
-<h2 align="middle">aaaaaaaaaaaa</h2>
-<p>
-    aaaaaaaaaaaaaaaaaaaaaaaaaa
-</p>
-<br>
+<h2 align="middle">Milestone</h2>
 
+<h3>Overview</h3>
+<p>
+    So far, we have made major progress in understanding the Optifine pipeline for creating shaders. We can separate our shader rendering into lighting and texture. The lighting pipeline starts by including the different inputs that Minecraft has for our lighting sources as well as how we take in the texture we are calculating light for. By default, Minecraft has a light map which stores how “lit up” an area is. This function then scales the color of the pixel based on the light value from 0 to 15. The effects that we are going to create will better use light to create more global illumination and smoother lighting. To do this, we follow similar steps to the shaders in Project 4, we have locations as well as different uniform samplers that we can use to draw rays and create shading. As we create more effects, we can simply add more calculations to change how we calculate the final color of each pixel. 
+</p>
+<h3>Textures</h3>
+<p>The texture pipeline is a deferred rendering pipeling can be broken up into gbuffer shaders and composite shaders. Gbuffer shaders take data from the environment, such as the sun, clouds, the sky, terrain, and creatures in order to render basic textures. Then, after shadow maps are created, composite shaders take in the outputs of the gbuffer shaders and can apply additional custom colorings and textures. Specifically, specific types of blocks and entities can be colored and textured differently using block and entity IDs. This is especially helpful for special blocks such as glass and water. Finally, after terrain and water loading, the composite shaders outputs the textures that are sent to the final shaders, which are rendered to the screen.</p>
+<h3>Lambertian Implementation</h3>
+<p>
+
+</p>
+<h3>Shadowmapping Implementation</h3>
+<p>
+  We also attempted to start implementing shadow mapping. In shadow mapping, the scene is first rendered from the light’s point of view to calculate the depth, which is deposited in the shadow map. If the light is blocked by an object that casts a shadow, it will have less depth. Then, we can reference the shadow map to determine whether fragments are in shadows. To implement shadow mapping, we modify the composite pass in the pipeline, where deferred lighting is calculated to compensate for shadows, as well as add a pass for shadows. First we need to convert the fragment to shadow space, done using some matrices defined by Optifine. If texture2D(shadowtex0, shadowpos.xy) < shadowpos.z), then we can determine that it is in a shadow and decrease its visibility to 0.5. Finally, we can output a color based on ambientcolor + visibility * diffusecolor * lightcolor * lightpower * cosTheta.
+</p>
+<h3>Overall Progress</h3>
+<p>
+ Reflecting back on our current progress, we think that we will be able to hit all of the effects that we have detailed in our proposal. We are a bit behind schedule but with work split between the four of us and our understanding of how it works, we’re already halfway to finishing. All we have to do is finish implementation of the features and perhaps add new features that have never been done before. However, new features will be dependent on how fast we are able to finish the implementations of what we have documented.
+
+</p>
+<h2 align="middle"><a href="https://drive.google.com/file/d/15vfVlaPctjL-c-Idu7HnqDdUEpwVVIaA/view">Milestone Video</a></h2>
+
+<h2 align = "middle"><a href="https://docs.google.com/presentation/d/1eNYpFc20tZ1YtwXHN3_roCw9pT8M9vF_vpIMOb47Gik/edit#slide=id.g23a5eb44527_4_0">Milestone Slides</a></h2>
 
 </body>
 </html>
