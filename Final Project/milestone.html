@@ -52,10 +52,20 @@
 </p>
 <h3>Textures</h3>
 <p>The texture pipeline is a deferred rendering pipeling can be broken up into gbuffer shaders and composite shaders. Gbuffer shaders take data from the environment, such as the sun, clouds, the sky, terrain, and creatures in order to render basic textures. Then, after shadow maps are created, composite shaders take in the outputs of the gbuffer shaders and can apply additional custom colorings and textures. Specifically, specific types of blocks and entities can be colored and textured differently using block and entity IDs. This is especially helpful for special blocks such as glass and water. Finally, after terrain and water loading, the composite shaders outputs the textures that are sent to the final shaders, which are rendered to the screen.</p>
+<div align="middle">
+  <img src="images/pipeline.png" align="middle" width="800px"/>
+  <figcaption>Example Pipeline</figcaption>
+  </div>
+
 <h3>Lambertian Implementation</h3>
 <p>
+  We were successful in using the Optifine pipeline by creating a simple updated lambertian shader. We first used the vertex shader in the gbuffers terrain to get the normal. We write the result to our fragment shader as the gnormal, limiting it to a range between 0 and 1. Then, in our composite shaders, we un-normalize the normal vector to perform the calculation for lambertian coloring as .5 * color * max(0, dot(normal, normalize(sunPosition)). The resulting custom shader clearly shows shadows on individual blocks:
 
 </p>
+<div align="middle">
+<img src="images/example.png" align="middle" width="400px"/>
+<figcaption>Lambertian Shading</figcaption>
+</div>
 <h3>Shadowmapping Implementation</h3>
 <p>
   We also attempted to start implementing shadow mapping. In shadow mapping, the scene is first rendered from the light’s point of view to calculate the depth, which is deposited in the shadow map. If the light is blocked by an object that casts a shadow, it will have less depth. Then, we can reference the shadow map to determine whether fragments are in shadows. To implement shadow mapping, we modify the composite pass in the pipeline, where deferred lighting is calculated to compensate for shadows, as well as add a pass for shadows. First we need to convert the fragment to shadow space, done using some matrices defined by Optifine. If texture2D(shadowtex0, shadowpos.xy) < shadowpos.z), then we can determine that it is in a shadow and decrease its visibility to 0.5. Finally, we can output a color based on ambientcolor + visibility * diffusecolor * lightcolor * lightpower * cosTheta.
