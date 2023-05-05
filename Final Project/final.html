@@ -52,5 +52,48 @@
 
 <h3 align="left">Shadow Mapping</h3>
 
+<p>
+  At a high level overview, shadow mapping is just casting a shadow on pixels that do not have a direct line of sight to the sun. 
+  In theory, it’s easy but the implementation was a lot more involved. We followed the reference at http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/.
+<br>
+To start, we used shadowtex0, which is a shadow map that is provided by Optifine. We then use matrix calculations on our texture coordinate to move it into shadow space. This is accomplished by first moving to world space, and then shadow space. We compare texture coordinate sample to its equivalent point in the shadow map. If the depth of our texture is greater than that of the shadow map, our texture is further away from the sun, meaning it is in a shadow. 
+</p>
+<div align="middle">
+  <img src="images/shadowmapgraphic.png" align="middle" width="800px"/>
+  </div>
+
+  <p>
+    After implementing this check, we need to also implement a distortion algorithm for the shadows. The algorithm we chose was augmenting the x and y by (cuberoot(abs(x^3 + y^3))). We also scaled the z by 1.2. This algorithm was chosen based on trials we did with different algorithms. Ultimately, this one worked the best.
+  <br>
+  How we specifically chose to ultimately write the shadow was based on a check if the normal of the texture was perpendicular to the normal of the sun. The reason for this is that without this check, we get weird fragmenting on the sides of blocks due to small calculation errors.
+  </p>
+  <div align="middle">
+    <img src="images/weirdfragments.png" align="middle" width="800px"/>
+    </div>
+
+  <p>
+    This effect took the longest to debug. We tried various methods such as clamping some values and changing the distortion algorithm.
+<br>In the end result, we were able to create these great shadow effects.
+
+  </p>
+  <div align="middle">
+    <img src="images/finalshadow.png" align="middle" width="800px"/>
+    </div>
+
+
+    <h3 align="left">Resources</h3>
+
+    <p>
+      https://optifine.readthedocs.io/shaders_dev.html#overview (documentation for OptiFine rendering)
+<br>
+https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html (Screen-space reflection)
+<br>
+https://bartwronski.files.wordpress.com/2014/08/bwronski_volumetric_fog_siggraph2014.pdf (Volumetric fog)
+<br>
+http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/ (Shadow mapping)
+<br>
+We plan on using OpenGL/GLSL for our implementation as that is what Minecraft and OptiFine use.
+    </p>
+
 </body>
 </html>
