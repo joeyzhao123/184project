@@ -88,6 +88,43 @@ To start, we used shadowtex0, which is a shadow map that is provided by Optifine
     </div>
 
 <h2 align="middle">Bloom</h2>
+<p>
+  Bloom is a post processing effect that aims to reproduce the glow effects we see in real life of emissive objects. There are two main approaches to implementing a bloom effect: an HDR bloom and a thresholding bloom. We chose the latter because of limitations in the optifine pipeline; however, HDR bloom is indeed possible to implement.  <br>
+For thresholding bloom, we want to first find the bright blocks, draw that to a separate texture, blur this texture, then blend it back into the original. In order to find the bright blocks, we first have to calculate perceived brightness, or relative luminance. We dot the color vector with a predefined constant vector that reflects the luminance efficiency function we learned in lecture. The colors that exceed a certain threshold are counted as “bright”. A problem we faced is that because there is no HDR support, there is effectively no difference between a white flower and a glowing torch. To combat this, we checked block ids and if the block didn’t count as an emissive object, the overall bloom was heavily attenuated. If the threshold was not met, black is returned. 
+</p>
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/extracted_color.png" align="middle" width="400px"/>
+			<figcaption align="middle">Extracted colors</figcaption>
+		</td>
+	  </tr>
+	</table>
+</div>
+<p>
+After writing the bright textures to a separate drawbuffer, we want to blur it. A common technique is to use a Gaussian filter for a smooth and natural blur. While easy to implement naively, it is extremely inefficient. With a modest filter size of 30, each fragment will take at least 900 samples. In practice, this drops framerates on a powerful graphics card from over 165 frames to about 30 frames a second. Thankfully, a great property of the Gaussian is that it is a separable equation. Therefore, we create two separate passes, one for the horizontal blur and one for the vertical blur. This significantly reduces runtime, now 60 samples, and creates the same effect. To add an even grittier (and subjectively better) look to the final bloom, we blurred further with two passes of a box filter. Finally, we add this texture to the original to complete the effect: 
+</p>
+
+<div align="middle">
+	<table style="width=100%">
+	  <tr>
+		<td>		
+			<img src="images/blurred_color.png" align="middle" width="400px"/>
+			<figcaption align="middle">Blurred colors</figcaption>
+		</td>
+		<td>		
+			<img src="images/bloom.png" align="middle" width="400px"/>
+			<figcaption align="middle">Final bloom effect</figcaption>
+    </td>
+	  </tr>
+	</table>
+</div>
+<p>
+As an aside, implementing an HDR bloom does not require the bright light extraction step; we simply blur and blend together with a strong bias towards the original HDR texture and we get a great bloom effect. This is because with HDR, bright colors are inherently biased. 
+<br>
+We learned that multiple passes are extraordinarily useful not only for clean and integrable code but also for implementing separable filters!
+</p>
 
 <h2 align="middle">Atmospheric Lighting</h2>
 <p>
