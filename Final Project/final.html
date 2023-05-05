@@ -46,11 +46,11 @@
 
 <h2 align="middle">Overview</h2>
 <p>
-  Our final project involved writing our own shaders in Minecraft in order to introduce different graphical effects that the base game lacks. We implemented shadow mapping, bloom, screen space reflections, rippling water and swaying leaves, and atmospheric lighting. These effects, when combined together, provide a more immersive gaming experience with the improved visuals. Below is a quick demo highlighting some of our features:
+  Our final project involved writing our own shaders in Minecraft in order to introduce different graphical effects that the base game lacks. We implemented shadow mapping, bloom, screen space reflections, rippling water and swaying leaves, and atmospheric lighting. These effects, when combined together, provide a more immersive gaming experience with the improved visuals. Below is a showcase video highlighting some of our features, with some high-level overviews of our implementations:
 </p>
 
 <div align="middle">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/bX7c6NQqh10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Yxl4U3UC1FY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <h2 align="middle">Shadow Mapping</h2>
@@ -219,7 +219,7 @@ We smooth out out the transition between the horizon up to a certain horizontal 
 <h2 align="middle">Screen Space Reflections</h2>
 
 <p>
-  We implemented screen space reflections to cast realistic reflections on water surfaces. We referenced <a href=https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html>this shader tutorial</a> and <a href=https://sugulee.wordpress.com/2021/01/16/performance-optimizations-for-screen-space-reflections-technique-part-1-linear-tracing-method>this optimization article</a> to help implement this. In screen space reflection we cast a ray in view space from the player to the water block we want to reflect onto and reflect the ray about the normal of the water block. We trace along the reflected ray, at each step comparing the depths for intersection. If the thickness, sampled ray depth - sample depth is greater than 0, then we consider that the ray has hit something that should be reflected onto the water. We implemented this by calculating the view position and reflecting it across the normal of the water block and multiply it by a step size of 0.1 to get an increment of the ray tracing. 
+  We implemented screen space reflections to cast realistic reflections on water surfaces. We referenced <a href=https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html>3d game shaders for beginners</a> and <a href=https://sugulee.wordpress.com/2021/01/16/performance-optimizations-for-screen-space-reflections-technique-part-1-linear-tracing-method>optimization techniques for screen space reflections</a> to help implement this. In screen space reflection we cast a ray in view space from the player to the water block we want to reflect onto and reflect the ray about the normal of the water block. We trace along the reflected ray, at each step comparing the depths for intersection. If the thickness, sampled ray depth - sample depth is greater than 0, then we consider that the ray has hit something that should be reflected onto the water. We implemented this by calculating the view position and reflecting it across the normal of the water block and multiply it by a step size of 0.1 to get an increment of the ray tracing. 
 </p>
 <div align="middle">
 	<table style="width=100%">
@@ -273,19 +273,18 @@ We smooth out out the transition between the horizon up to a certain horizontal 
 	</table>
 </div>
 
-
 <h2 align="middle">References</h2>
 
 <p>
 <a href=https://optifine.readthedocs.io/shaders_dev.html#overview>https://optifine.readthedocs.io/shaders_dev.html#overview</a> (documentation for OptiFine rendering)
 <br>
-<a href=https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html>https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html</a> (Screen-space reflection)
+<a href=https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html>https://lettier.github.io/3d-game-shaders-for-beginners/screen-space-reflection.html</a> (Screen-space reflection implementation)
 <br>
 <a href=https://sugulee.wordpress.com/2021/01/16/performance-optimizations-for-screen-space-reflections-technique-part-1-linear-tracing-method>https://sugulee.wordpress.com/2021/01/16/performance-optimizations-for-screen-space-reflections-technique-part-1-linear-tracing-method</a> (Screen-space reflection optimization)
 <br>
 <a href=http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping>http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/</a> (Shadow mapping)
 <br>
-We used OpenGL/GLSL for our implementation as that is what Minecraft and OptiFine use.
+We used OpenGL/GLSL for our implementation as that is what Minecraft and OptiFine use. We also started with a baseline Optifine shaderpack, with a set of the base files for us to modify, but only having the native minecraft features.
     </p>
 
 <h2 align="middle">Contributions</h2>
