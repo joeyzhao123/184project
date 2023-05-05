@@ -61,7 +61,7 @@
 
 <div align="middle">
 	<table style="width=100%">
-	  <tr>
+	  <tr align="center">
 		<td>		
 			<img src="images/base_sun.png" align="middle" width="400px"/>
 			<figcaption align="middle">Base sun</figcaption>
@@ -76,15 +76,69 @@
 
 <p>
   However, in reality, the atmosphere enhances ambient lighting by scattering light from the sun or moon. For visual effect, we can achieve this by treating the sun or moon as an illuminating object in the sky, and then incorporating their radiance into nearby sky fragments in the fragment shader step with some sort of radiance falloff rule.
-</p>
 
-<p>
-  Minecraft does not render any physical sun, moon, or sky blocks. Instead, these entities are represented as coordinates in view space, and thus act as normalized vectors from your viewing position to the angular position where the sun or specific fragment of sky is. We use this information to simulate a “distance to the sun/moon” metric by projecting the view vector of the sky fragment onto the sun/moon vector, where the shorter the projection is, the farther away the sky fragment is. We then used this distance metric to determine how much light and color we should add from the sun/moon to the relevant sky fragments. One thing to note from lecture is that we learned that irradiance falloff follows the inverse square law in the real world, but sometimes it has to be changed for visual effect. This idea definitely applied here, as we used distance's 10th power as the relation in order to lower the sky illumination to a satisfactory level.
+  Minecraft does not render any physical sun, moon, or sky blocks. Instead, these entities are represented as coordinates in view space, and thus can be treated as normalized vectors from your viewing position to the angular position where the sun, moon, or target fragment of sky is. We use this information to simulate a “distance to the sun/moon” metric by projecting the view vector of the sky fragment onto the sun/moon vector, where the shorter the projection is, the farther away the sky fragment is. We then used this distance metric in our calculations to determine how much light and color we should add from the sun/moon to the relevant sky fragments. One thing to note from lecture is that we learned that irradiance falloff follows the inverse square law in the real world, but sometimes it has to be changed for visual effect. This idea definitely applied here, as we used distance's 10th power as the relation in order to lower the sky illumination to a satisfactory level.
 </p>
 
 <p>
   Shown below are pictures of sun and the moon with atmospheric lighting incorporated:
 </p>
+
+<div align="middle">
+	<table style="width=100%">
+	  <tr align="center">
+		<td>		
+			<img src="images/light_sun.png" align="middle" width="400px"/>
+			<figcaption align="middle">Atmospheric lit sun</figcaption>
+		</td>
+		<td>		
+			<img src="images/light_moon.png" align="middle" width="400px"/>
+			<figcaption align="middle">Atmospheric lit moon</figcaption>
+    </td>
+	  </tr>
+	</table>
+</div>
+<p>
+We can see that with atmospheric lighting, the sun and moon spread light to their surroundings, and the illumination falls off with distance, but even then, the overall color of the sky is changed during both the day and the night.
+<br>
+<br>
+In the real world, atmospheric lighting is most prominent along the horizon, when the rays come in at a flatter angle and thus scatter more. Minecraft's base sky has a pretty clear delineation between the sky texture and where the base game attempts to transition to the horizon. This delineation is most prominent during sunrise:
+</p>
+
+<div align="middle">
+	<table style="width=100%">
+	  <tr align="center">
+		<td>		
+			<img src="images/base_horizon.png" align="middle" width="400px"/>
+			<figcaption align="middle">Base minecraft horizon. Notice the clear delineation between the dark and lighter blue.</figcaption>
+		</td>
+		<td>		
+			<img src="images/base_sunset.png" align="middle" width="400px"/>
+			<figcaption align="middle">Base minecraft sunrise. Notice the clear delineation between the blue and orange skies.</figcaption>
+    </td>
+	  </tr>
+	</table>
+</div>
+<br>
+
+We smooth out out the transition between the horizon up to a certain horizontal line in the sky by mixing the color of the sky and its fog color at various levels corresponding to how high up in the sky you are. We take advantage of this during sunrise by starting to illuminate the sky fragments around the sun and moon even if it is not yet in view, leading to much smoother gradients and amazing effects during the sunrise  such as these:
+</p>
+
+<div align="middle">
+	<table style="width=100%">
+	  <tr align="center">
+		<td>		
+			<img src="images/light_horizon.png" align="middle" width="400px"/>
+			<figcaption align="middle">Smoother horizon transition, the gradient between the blue sky and the white horizon is much smoother</figcaption>
+		</td>
+		<td>		
+			<img src="images/light_sunset.png" align="middle" width="400px"/>
+			<figcaption align="middle">Smoother sunrise transition, the gradient between the dark blue sky and the orange sunrise horizon is much smoother</figcaption>
+    </td>
+	  </tr>
+	</table>
+</div>
+<br>
 
 <h2 align="middle">Screen Space Reflections</h2>
 
